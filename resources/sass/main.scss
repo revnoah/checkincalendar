@@ -1,0 +1,60 @@
+body {
+    background-color: $dark-grey;
+    color: $white;
+}
+
+.jumbotron {
+    padding: 4rem 1rem;
+    margin-bottom: 0;
+    background-color: $white;
+    color: $dark-grey;
+}
+
+.jumbotron-secondary {
+    background-color: $accent-bg;
+    color: $accent-fg;
+}
+
+.alert-messages {
+    padding: 1rem;
+    margin: 0;
+    background-color: $white;
+    color: $dark-grey;    
+}
+
+.table {
+    .col-actions {
+        max-width: 120px;
+    }
+}
+
+.bg-medium {
+    background-color: $accent-bg;
+    color: $accent-fg;
+}
+
+.card-body {
+    color: $dark-grey;
+    min-height: 180px;
+}
+
+.card-template {
+    opacity: .9;
+
+    h3 {
+        color: $light-grey;
+    }
+
+    .card-body {
+        color: $light-grey;
+    }
+}
+
+.card-template:hover, .card-template.active {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.no-scroll {
+    overflow-y: hidden;
+}

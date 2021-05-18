@@ -1,0 +1,93 @@
+textarea.form-control {
+	min-height: 60px;
+	transition: min-height $transitionSpeed;
+}
+
+textarea.form-control:focus {
+	min-height: 180px;
+}
+
+.select-block, .select-person {
+	cursor: pointer;
+}
+
+.list-person {
+	label {
+		margin-top: 10px;
+	}
+}
+
+.input-heading {
+	background-color: transparent;
+	color: $white;
+	border: none;
+	border-radius: 5px;
+	padding: 6px;
+	width: 100%;
+	font-size: 18px;
+	font-weight: 600;
+	transition: background-color  $transitionSpeed;
+	transition: color  $transitionSpeed;
+}
+
+.input-heading:focus, .input-heading:hover {
+	background-color: $fieldfocus;
+	color: $black;
+}
+
+.input-checkbox {
+	background-color: transparent;
+	border: none;
+	border-bottom: solid 1px $light-grey;
+	padding: 3px 6px;
+	margin-left: 5px;
+	font-size: 16px;
+	font-weight: 500;
+	transition: background-color $transitionSpeed;
+}
+
+.input-checkbox:focus, .input-checkbox:hover {
+	background-color: $fieldfocus;
+	border-radius: 5px;
+}
+
+.input-indent {
+	margin-left: 27px;
+}
+
+.form-control-dark {
+	color: $white;
+	background-color: $dark-grey;
+	border: solid 1px $accent-bg;
+}
+
+.form-control-dark:focus {
+	color: $white;
+	background-color: $dark-grey;
+}
+
+.form-toggle {
+	cursor: pointer;
+	padding: 10px;
+	border: solid 1px transparent;
+	transition: border $transitionSpeed;
+}
+
+.form-toggle:hover {
+	border-color: $accent-bg;
+	border-radius: 3px;
+}
+
+ul.checklist, .checklist ul {
+	padding: 0;
+
+	li {
+		list-style: none;
+		margin-top: 5px;
+		margin-bottom: 5px;
+
+		input[type=checkbox] {
+			cursor: pointer;
+		}
+	}
+}

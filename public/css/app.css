@@ -1,0 +1,196 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+body {
+  background-color: #363636;
+  color: #fff;
+}
+
+.jumbotron {
+  padding: 4rem 1rem;
+  margin-bottom: 0;
+  background-color: #fff;
+  color: #363636;
+}
+
+.jumbotron-secondary {
+  background-color: #6cb2eb;
+  color: #000;
+}
+
+.alert-messages {
+  padding: 1rem;
+  margin: 0;
+  background-color: #fff;
+  color: #363636;
+}
+
+.table .col-actions {
+  max-width: 120px;
+}
+
+.bg-medium {
+  background-color: #6cb2eb;
+  color: #000;
+}
+
+.card-body {
+  color: #363636;
+  min-height: 180px;
+}
+
+.card-template {
+  opacity: 0.9;
+}
+.card-template h3 {
+  color: #b4b4b4;
+}
+.card-template .card-body {
+  color: #b4b4b4;
+}
+
+.card-template:hover, .card-template.active {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.no-scroll {
+  overflow-y: hidden;
+}
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+aside {
+  background-color: #363636;
+  width: 320px;
+  height: 100%;
+  top: 50px;
+  position: fixed;
+  padding: 30px;
+  right: -320px;
+  overflow-y: auto;
+  transition: right 300ms;
+}
+
+aside.active {
+  right: 0;
+}
+
+#sidebar-hamburger {
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  z-index: 1999;
+  top: 0;
+  right: 0;
+  background-color: #363636;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+}
+#sidebar-hamburger span {
+  font-size: 24px;
+  margin-top: 8px;
+  display: block;
+}
+
+textarea.form-control {
+  min-height: 60px;
+  transition: min-height 300ms;
+}
+
+textarea.form-control:focus {
+  min-height: 180px;
+}
+
+.select-block, .select-person {
+  cursor: pointer;
+}
+
+.list-person label {
+  margin-top: 10px;
+}
+
+.input-heading {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 600;
+  transition: background-color 300ms;
+  transition: color 300ms;
+}
+
+.input-heading:focus, .input-heading:hover {
+  background-color: #b4b4b4;
+  color: #000;
+}
+
+.input-checkbox {
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 1px #b4b4b4;
+  padding: 3px 6px;
+  margin-left: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 300ms;
+}
+
+.input-checkbox:focus, .input-checkbox:hover {
+  background-color: #b4b4b4;
+  border-radius: 5px;
+}
+
+.input-indent {
+  margin-left: 27px;
+}
+
+.form-control-dark {
+  color: #fff;
+  background-color: #363636;
+  border: solid 1px #6cb2eb;
+}
+
+.form-control-dark:focus {
+  color: #fff;
+  background-color: #363636;
+}
+
+.form-toggle {
+  cursor: pointer;
+  padding: 10px;
+  border: solid 1px transparent;
+  transition: border 300ms;
+}
+
+.form-toggle:hover {
+  border-color: #6cb2eb;
+  border-radius: 3px;
+}
+
+ul.checklist, .checklist ul {
+  padding: 0;
+}
+ul.checklist li, .checklist ul li {
+  list-style: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+ul.checklist li input[type=checkbox], .checklist ul li input[type=checkbox] {
+  cursor: pointer;
+}
+
+.panel {
+  position: relative;
+}
+.panel .actions {
+  position: absolute;
+}
+.panel .actions-right {
+  right: 0;
+}
