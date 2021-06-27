@@ -5,6 +5,17 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
+//https://github.com/endroid/qr-code
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\Writer\PngWriter;
 
 class LocationController extends Controller
 {
@@ -49,7 +60,7 @@ class LocationController extends Controller
         //handle item after saved
         if($item_saved) {
             //display message to display to user
-            $request->session()->flash('message', 'Add location ' . $location->name);
+            $request->session()->flash('message', 'Added location ' . $location->name);
             $request->session()->flash('status', 'success');
         } else {
             //display message to display to user
@@ -59,7 +70,7 @@ class LocationController extends Controller
 
         //redirect based on submit button
         if($location->id > 0) {
-            $url = $this->basepath . '/create';
+            $url = $this->basepath;
             return redirect($url);
         } else {
             return back();
@@ -74,6 +85,20 @@ class LocationController extends Controller
      */
     public function show(Location $location)
     {
+        $seed = $location->code . $location->id;
+
+        $hashed = hash('ripemd160', $seed);
+
+        $url = url('checkin/' . $location->organization->code . '/' . $hashed);
+
+        $qrCode = $this->generateQrCode($url);
+
+        // print_r($qrCode);
+
+        // Directly output the QR code
+        //header('Content-Type: '.$qrCode->getMimeType());
+        //echo $qrCode->getString();
+
         return view('location.show', compact('location') );
     }
 
@@ -111,7 +136,7 @@ class LocationController extends Controller
         $request->session()->flash('status', 'success');
 
         //set redirect to include query tokens
-        $redirectUri = $this->basepath . '/' . $location->id;
+        $redirectUri = $this->basepath . '/' . $location->code;
 
         return redirect($redirectUri);
     }
@@ -133,4 +158,48 @@ class LocationController extends Controller
         //redirect
         return redirect($redirectUri);  
     }
+
+    /**
+     * Output PDF for the specified resource.
+     *
+     * @param  \App\Models\Location  $location
+     * @return \Illuminate\Http\Response
+     */
+    public function pdf(Location $location)
+    {
+        $qrCode = $this->generateQrCode($location->url, 480);
+
+        header("Content-Type: application/pdf");
+
+        $mpdf = new \Mpdf\Mpdf();
+        $mpdf->SetTitle($location->name);
+        $mpdf->SetSubject($location->description);
+
+        $mpdf->WriteHTML('<h1 align="center">' . $location->name . '</h1>');
+        $mpdf->WriteHTML('<p align="center">' . $location->description . '</p>');
+        $mpdf->Image($qrCode->getDataUri(), 40, 80);
+        $mpdf->WriteHTML('<p align="center">' . $location->url . '</p>');
+
+        $mpdf->Output();
+
+        exit;
+    }
+
+    private function generateQrCode(string $url, int $size = 300) {
+        $writer = new PngWriter();
+
+        // Create QR code
+        $qrCode = QrCode::create($url)
+            ->setEncoding(new Encoding('UTF-8'))
+            ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
+            ->setSize($size)
+            ->setMargin(10)
+            ->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
+            ->setForegroundColor(new Color(0, 0, 0))
+            ->setBackgroundColor(new Color(255, 255, 255));
+
+        $result = $writer->write($qrCode);
+        
+        return $result;
+    }    
 }

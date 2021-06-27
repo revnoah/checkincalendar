@@ -16,7 +16,7 @@
     <div class="row">
       <div class="form-group col-md-12 col-sm-12 col-xs-12">
         <label for="code">{{ __('Code') }}</label>
-        <input type="text" id="code" name="code" value="{{ old('code') !== null ? old('code') : (isset($organization->code) ? $organization->code : '') }}" class="form-control form-input" placeholder="{{ __('Code') }}" />
+        <input type="text" id="code" name="code" value="{{ old('code') !== null ? old('code') : (isset($organization->code) ? $organization->code : '') }}" class="form-control form-input" placeholder="{{ __('Code') }}" required />
       </div>
     </div>
 

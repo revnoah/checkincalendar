@@ -23,9 +23,9 @@
     @if(count($organization->locations)==0)
       <div class="alert alert-warning" role="alert">
         <p>There are no locations. Start by adding one.</p>
-        <a href="{{route('location.create')}}" class="btn btn-default">Add Location</a>
       </div>
     @endif
+    <a href="{{route('location.create')}}" class="btn btn-primary">Add Location</a>
 	</div>
 </div>
 
