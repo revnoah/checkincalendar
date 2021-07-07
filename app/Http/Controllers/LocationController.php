@@ -91,15 +91,10 @@ class LocationController extends Controller
 
         $url = url('checkin/' . $location->organization->code . '/' . $hashed);
 
-        $qrCode = $this->generateQrCode($url);
+        $qrcodeImage = $this->generateQrCode($url, 380);
+        $qrcode = $qrcodeImage->getDataUri();
 
-        // print_r($qrCode);
-
-        // Directly output the QR code
-        //header('Content-Type: '.$qrCode->getMimeType());
-        //echo $qrCode->getString();
-
-        return view('location.show', compact('location') );
+        return view('location.show', compact('location', 'qrcode') );
     }
 
     /**

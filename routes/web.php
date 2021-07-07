@@ -49,7 +49,7 @@ Route::group(['middleware' => ['account.checkin']], function () {
 });
 
 Route::get('/checkin/signin', [CheckinController::class, 'signin'])->name('checkin.signin');
-Route::post('/checkin/signed', [CheckinController::class, 'signedin'])->name('checkin.signedin');
+Route::post('/checkin/signin', [CheckinController::class, 'signedin'])->name('checkin.signedin');
 
 //shared and anon routes
 Route::get('/', [HomeController::class, 'index'])->name('home');

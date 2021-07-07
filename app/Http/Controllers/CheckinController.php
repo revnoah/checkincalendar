@@ -101,6 +101,14 @@ class CheckinController extends Controller
     }
 
     public function signin(Request $request) {
+        $user = Auth::user();
+
+        if ($user) {
+            session(['username' => $user->name]);
+
+            return redirect('organizatin')->with('statusCode', 'success')->with('statusMessage', 'Signed in as ' . $user->name);
+        }
+
         $username = session('username');
 
         return view('checkin.username', compact('username') );        
@@ -110,7 +118,7 @@ class CheckinController extends Controller
         $username = $request->input('username');
 
         if ($username) {
-            session('username', $username);
+            session(['username' => $username]);
 
             return redirect('/')->with('statusCode', 'success')->with('statusMessage', 'Signed in as ' . $username);
         }

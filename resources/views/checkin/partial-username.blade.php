@@ -5,7 +5,7 @@
     <div class="row">
       <div class="form-group col-md-12 col-sm-12 col-xs-12">
         <label for="username">{{ __('Username') }}</label>
-        <input type="text" id="username" name="username" value="{{ old('username') !== null ? old('username') : '' }}" class="form-control form-input" placeholder="{{ __('Username') }}" required />
+        <input type="text" id="username" name="username" value="{{ old('username') !== null ? old('username') : ($username != '' ? $username : '') }}" class="form-control form-input" placeholder="{{ __('Username') }}" required />
       </div>
     </div>
 

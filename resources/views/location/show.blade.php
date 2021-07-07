@@ -11,9 +11,22 @@
       </div>
     @endif
     <h1>{{ $location->name }}</h1>
-    <p class="text-muted">{{ $location->code }}</p>
+    <p class="text-muted text-uppercase">{{ $location->code }}</p>
     <p class="description">{{ $location->description }}</p>
-    @include('checkin/partial-checkin')
+
+    <div class="row">
+      <div class="col-6 col-xs-12">
+        @include('checkin/partial-checkin')
+      </div>
+      @if (Auth::check())
+        <div class="col-6 col-xs-12 text-right">
+          <div class="text-center d-flex flex-column">
+            <img src="{{ $qrcode }}" class="qrcode" />
+            <span class="qrcode text-uppercase mt-2">{{ $location->code }}</span>
+          </div>
+        </div>
+      @endif
+    </div>
 	</div>
 </div>
 
