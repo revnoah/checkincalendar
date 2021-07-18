@@ -11,6 +11,11 @@ class Location extends Model
 
     // protected $with = ['organization'];
 
+    public function getRouteKeyName()
+    {
+        return 'code';
+    }
+
     public function organization() {
         return $this->belongsTo(Organization::class);
     }    

@@ -37,6 +37,8 @@ class OrganizationController extends Controller
      */
     public function create()
     {
+        $organization = new Organization();
+        
         return view('organization.create', compact('organization') );
     }
 
@@ -48,7 +50,25 @@ class OrganizationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+
+        //update item
+        $organization = new Organization();
+        $organization->user_id = $user->id;
+        $organization->name = $request->input('name');
+        $organization->code = $request->input('code');
+        $organization->description = $request->input('description');
+
+        $organization->save();
+
+        //display message to display to user
+        $request->session()->flash('message', 'Successfully setup organization');
+        $request->session()->flash('status', 'success');
+
+        //set redirect to include query tokens
+        $redirectUri = $this->basepath . '/' . $organization->code;
+
+        return redirect($redirectUri);  
     }
 
     /**

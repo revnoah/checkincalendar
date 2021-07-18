@@ -39,17 +39,20 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+<<<<<<< Updated upstream
+=======
 
                         <li class="nav-item">
-                            {{ session('username') }}
+                            <a class="nav-link" href="{{ route('checkin.signin') }}">{{ session('username') }}</a>
                         </li>
 
                         @auth('web')
                             <li class="nav-item">
-                                TESTING
+                                <a class="nav-link" href="{{ route('checkin.signin') }}">TESTING</a>
                             </li>
                         @endauth
 
+>>>>>>> Stashed changes
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))

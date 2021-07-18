@@ -22,7 +22,15 @@
       @endforeach
       </ul>
     @endisset
+<<<<<<< Updated upstream
+    @if(count($organization->locations)==0)
+      <div class="alert alert-warning" role="alert">
+        <p>There are no locations. Start by adding one.</p>
+        <a href="{{route('location.create')}}" class="btn btn-default">Add Location</a>
+      </div>
+    @endif
 	</div>
+=======
 
     @if (Auth::check())
       <div class="my-4">
@@ -36,6 +44,7 @@
         <a href="{{route('location.create')}}" class="btn btn-secondary">{{ __('Add New Location') }}</a>
       </div>
     @endif
+>>>>>>> Stashed changes
 </div>
 
 @endsection
