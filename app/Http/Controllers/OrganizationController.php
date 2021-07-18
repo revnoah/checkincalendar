@@ -11,19 +11,21 @@ class OrganizationController extends Controller
 {
     protected $basepath;
 
-    function __construct()
+    public function __construct()
     {
         $this->basepath = '/organization';
     }
 
     /**
-     * Display a listing of the resource.
+     * Display the index
      *
+     * @param  \App\Models\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
+        $orgcode = session('orgcode', '');
 
         $organization = $user->organization;
 
@@ -68,7 +70,14 @@ class OrganizationController extends Controller
         //set redirect to include query tokens
         $redirectUri = $this->basepath . '/' . $organization->code;
 
-        return redirect($redirectUri);  
+        if ($user) {
+            $organization = $user->organization;
+            return redirect('organization/' . $organization->code);
+        } elseif ($orgcode !== '') {
+            return redirect('organization/' . $orgcode);
+        }
+
+        return view('organization.search');
     }
 
     /**
@@ -82,7 +91,7 @@ class OrganizationController extends Controller
         $user = Auth::user();
 
         //item index
-        return view('organization.show', compact('organization') );
+        return view('organization.show', compact('organization'));
     }
 
     /**
@@ -93,7 +102,7 @@ class OrganizationController extends Controller
      */
     public function edit(Organization $organization)
     {
-        return view('organization.edit', compact('organization') );
+        return view('organization.edit', compact('organization'));
     }
 
     /**
@@ -119,26 +128,41 @@ class OrganizationController extends Controller
         $request->session()->flash('status', 'success');
 
         //set redirect to include query tokens
-        $redirectUri = $this->basepath . '/' . $organization->id;
+        $redirectUri = $this->basepath;
 
-        return redirect($redirectUri);  
+        return redirect($redirectUri);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Search for organization by code
      *
-     * @param  \App\Models\Organization  $organization
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return void
      */
-    public function destroy(Organization $organization)
+    public function search(Request $request)
     {
-        //set to base path
-        $redirectUri = $this->basepath;
+        $code = $request->input('code');
 
-        //TODO: add checks and validation
-        $organization->delete();
+        $organization = $this->findOrganizationByCode($code);
 
-        //redirect
-        return redirect($redirectUri);  
+        $statusMessage = __('Code invalid, access denied');
+        $statusCode = 'danger';
+
+        if ($organization) {
+            session(['orgcode' => $code]);
+
+            $statusMessage = __('Access granted');
+            $statusCode = 'success';
+        }
+
+        //set redirect to include query tokens
+        return redirect($this->basepath)->with('message', $statusMessage)->with('status', $statusCode);
+    }
+
+    private function findOrganizationByCode(string $search)
+    {
+        $organization = Organization::where('code', '=', $search)->first();
+
+        return $organization;
     }
 }

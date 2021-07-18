@@ -59,6 +59,8 @@ Route::group(['middleware' => ['account.config', 'auth']], function () {
     // Route::post('location/{location}', [LocationController::class, 'update'])->name('location.update');
     // Route::delete('location/{location}', [LocationController::class, 'delete'])->name('location.delete');
 
+    Route::get('/location/{location}/pdf', [LocationController::class, 'pdf'])->name('location.pdf');
+
     /*
     //accounts
     Route::resource('/account', 'AccountController')->except(['index', 'create', 'store']);
@@ -70,16 +72,11 @@ Route::group(['middleware' => ['account.config', 'auth']], function () {
     */
 });
 
-//basic authenticated routes
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/organization/create', [OrganizationController::class, 'create'])->name('organization.create');
-    Route::post('/organization/store', [OrganizationController::class, 'store'])->name('organization.store');
-});
-
-//basic authenticated routes
-Route::group(['middleware' => ['CheckIn']], function () {
+Route::group(['middleware' => ['account.checkin']], function () {
     //checkin
     Route::post('/checkin', [CheckinController::class, 'store'])->name('checkin.store');
+
+    Route::get('/checkin/{organization}/{code}', [CheckinController::class, 'qrcode'])->name('checkin.qrcode');
 });
 
 Auth::routes();

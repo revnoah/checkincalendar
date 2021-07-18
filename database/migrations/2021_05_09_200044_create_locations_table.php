@@ -18,7 +18,7 @@ class CreateLocationsTable extends Migration
             $table->unsignedBigInteger('organization_id');
             $table->string('code', 40);
             $table->string('name', 80);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->unsignedInteger('max')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();

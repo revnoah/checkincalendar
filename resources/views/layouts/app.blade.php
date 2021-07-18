@@ -35,20 +35,29 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('checkin.signin') }}">{{ session('username') }}</a>
+                        </li>
+
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('organization.index') }}">{{ __('Find Organization') }}</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('organization.index') }}">{{ __('My Organization') }}</a>
+                            </li>
+                        @endguest
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
 
                         <li class="nav-item">
-                            {{ session('username') }}
+                            <a class="nav-link" href="{{ route('checkin.signin') }}">{{ session('username') }}</a>
                         </li>
-
-                        @auth('web')
-                            <li class="nav-item">
-                                TESTING
-                            </li>
-                        @endauth
 
                         <!-- Authentication Links -->
                         @guest
