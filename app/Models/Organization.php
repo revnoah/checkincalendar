@@ -18,19 +18,23 @@ class Organization extends Model
         return 'code';
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function settings() {
+    public function settings()
+    {
         return $this->hasMany(Settings::class);
     }
 
-    public function locations() {
+    public function locations()
+    {
         return $this->hasMany(Location::class);
     }
 
-    public function getHashedAttribute() {
+    public function getHashedAttribute()
+    {
         $seed = $this->code . $this->id;
         $hashed = hash('ripemd160', $seed);
 

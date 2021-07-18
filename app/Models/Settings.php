@@ -11,7 +11,8 @@ class Settings extends Model
 
     protected $fillable = ['name', 'code', 'fieldtype', 'value'];
 
-    public function organization() {
+    public function organization()
+    {
         return $this->belongsTo(Organization::class);
     }
 }

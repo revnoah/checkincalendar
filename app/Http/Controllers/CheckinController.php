@@ -28,7 +28,7 @@ class CheckinController extends Controller
      */
     public function create()
     {
-        return view('checkin.create', compact('checkin') );
+        return view('checkin.create', compact('checkin'));
     }
 
     /**
@@ -53,7 +53,7 @@ class CheckinController extends Controller
      */
     public function show(Checkin $checkin)
     {
-        return view('checkin.show', compact('checkin') );
+        return view('checkin.show', compact('checkin'));
     }
 
     /**
@@ -90,7 +90,8 @@ class CheckinController extends Controller
         //
     }
 
-    public function qrcode(Request $request, Organization $organization, string $code) {
+    public function qrcode(Request $request, Organization $organization, string $code)
+    {
         $matchLocation = $this->matchCodeHash($organization, $code);
 
         if ($matchLocation) {
@@ -100,7 +101,8 @@ class CheckinController extends Controller
         }
     }
 
-    public function signin(Request $request) {
+    public function signin(Request $request)
+    {
         $user = Auth::user();
 
         if ($user) {
@@ -111,10 +113,11 @@ class CheckinController extends Controller
 
         $username = session('username');
 
-        return view('checkin.username', compact('username') );        
+        return view('checkin.username', compact('username'));
     }
 
-    public function signedin(Request $request) {
+    public function signedin(Request $request)
+    {
         $username = $request->input('username');
 
         if ($username) {
@@ -123,10 +126,11 @@ class CheckinController extends Controller
             return redirect('/')->with('statusCode', 'success')->with('statusMessage', 'Signed in as ' . $username);
         }
 
-        return view('checkin.username', compact('username') );        
+        return view('checkin.username', compact('username'));
     }
 
-    private function matchCodeHash(Organization $organization, string $code):?Location {
+    private function matchCodeHash(Organization $organization, string $code):?Location
+    {
         $locations = $organization->locations;
         foreach ($locations as $location) {
             if ($location->hashed == $code) {
@@ -143,7 +147,8 @@ class CheckinController extends Controller
      * @param string $code
      * @return boolean
      */
-    private function checkinUser(string $code, string $username):bool {
+    private function checkinUser(string $code, string $username):bool
+    {
         $location = $this->getLocationByCode($code);
 
         $checkin = new Checkin([
@@ -165,7 +170,8 @@ class CheckinController extends Controller
      * @param string $code
      * @return Location
      */
-    private function getLocationByCode(string $code):Location {
+    private function getLocationByCode(string $code):Location
+    {
         $location = Location::where('code', '=', $code)->firstOrFail();
 
         return $location;
@@ -176,14 +182,15 @@ class CheckinController extends Controller
      *
      * @return string
      */
-    private function getUserIpAddr():string {
-        if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+    private function getUserIpAddr():string
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             //ip from share internet
             $ip = $_SERVER['HTTP_CLIENT_IP'];
-        }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             //ip pass from proxy
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        }else{
+        } else {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
         return $ip;

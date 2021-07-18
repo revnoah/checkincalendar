@@ -11,7 +11,8 @@ class Checkin extends Model
 
     protected $fillable = ['user_id', 'location_id', 'username', 'ip_address'];
 
-    public function location() {
+    public function location()
+    {
         return $this->belongsTo(Location::class);
     }
 }

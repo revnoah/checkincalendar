@@ -35,7 +35,7 @@ class LocationController extends Controller
     {
         $location = new Location();
 
-        return view('location.create', compact('location') );
+        return view('location.create', compact('location'));
     }
 
     /**
@@ -58,7 +58,7 @@ class LocationController extends Controller
         $item_saved = $location->save();
 
         //handle item after saved
-        if($item_saved) {
+        if ($item_saved) {
             //display message to display to user
             $request->session()->flash('message', 'Added location ' . $location->name);
             $request->session()->flash('status', 'success');
@@ -69,7 +69,7 @@ class LocationController extends Controller
         }
 
         //redirect based on submit button
-        if($location->id > 0) {
+        if ($location->id > 0) {
             $url = $this->basepath;
             return redirect($url);
         } else {
@@ -94,7 +94,7 @@ class LocationController extends Controller
         $qrcodeImage = $this->generateQrCode($url, 380);
         $qrcode = $qrcodeImage->getDataUri();
 
-        return view('location.show', compact('location', 'qrcode') );
+        return view('location.show', compact('location', 'qrcode'));
     }
 
     /**
@@ -105,7 +105,7 @@ class LocationController extends Controller
      */
     public function edit(Location $location)
     {
-        return view('location.edit', compact('location') );
+        return view('location.edit', compact('location'));
     }
 
     /**
@@ -151,7 +151,7 @@ class LocationController extends Controller
         $location->delete();
 
         //redirect
-        return redirect($redirectUri);  
+        return redirect($redirectUri);
     }
 
     /**
@@ -180,7 +180,8 @@ class LocationController extends Controller
         exit;
     }
 
-    private function generateQrCode(string $url, int $size = 300) {
+    private function generateQrCode(string $url, int $size = 300)
+    {
         $writer = new PngWriter();
 
         // Create QR code
@@ -196,5 +197,5 @@ class LocationController extends Controller
         $result = $writer->write($qrCode);
         
         return $result;
-    }    
+    }
 }
