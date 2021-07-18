@@ -21,7 +21,7 @@ class LocationController extends Controller
 {
     protected $basepath;
 
-    function __construct()
+    public function __construct()
     {
         $this->basepath = '/location';
     }

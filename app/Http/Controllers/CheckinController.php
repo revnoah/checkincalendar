@@ -108,7 +108,9 @@ class CheckinController extends Controller
         if ($user) {
             session(['username' => $user->name]);
 
-            return redirect('organizatin')->with('statusCode', 'success')->with('statusMessage', 'Signed in as ' . $user->name);
+            return redirect('organization')
+                ->with('statusCode', 'success')
+                ->with('statusMessage', 'Signed in as ' . $user->name);
         }
 
         $username = session('username');
