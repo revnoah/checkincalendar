@@ -18,7 +18,7 @@ class CreateOrganizationsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('code', 40)->unique();
             $table->string('name', 80);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->boolean('active')->default(true);
             $table->boolean('stop_max')->default(true);
             $table->unsignedInteger('buffer_time')->default(0);

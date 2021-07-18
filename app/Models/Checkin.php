@@ -9,7 +9,10 @@ class Checkin extends Model
 {
     use HasFactory;
 
-    public function location() {
+    protected $fillable = ['user_id', 'location_id', 'username', 'ip_address'];
+
+    public function location()
+    {
         return $this->belongsTo(Location::class);
     }
 }

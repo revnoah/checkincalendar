@@ -16,13 +16,6 @@ body {
   color: #000;
 }
 
-.alert-messages {
-  padding: 1rem;
-  margin: 0;
-  background-color: #fff;
-  color: #363636;
-}
-
 .table .col-actions {
   max-width: 120px;
 }
