@@ -74,6 +74,7 @@ Route::group(['middleware' => ['account.config', 'auth']], function () {
 
 Route::group(['middleware' => ['account.checkin']], function () {
     //checkin
+    Route::get('/checkin', [CheckinController::class, 'signin'])->name('checkin.signin');
     Route::post('/checkin', [CheckinController::class, 'store'])->name('checkin.store');
 
     Route::get('/checkin/{organization}/{code}', [CheckinController::class, 'qrcode'])->name('checkin.qrcode');
