@@ -71,7 +71,7 @@ class LocationController extends Controller
         //redirect based on submit button
         if ($location->id > 0) {
             $url = $this->basepath;
-            return redirect($url);
+            return redirect($url . '/' . $location->code);
         } else {
             return back();
         }
