@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 body {
-  background-color: #363636;
-  color: #fff;
+  background-color: #d9d9d9;
+  color: #080808;
 }
 
 .jumbotron {
@@ -13,7 +13,7 @@ body {
 
 .jumbotron-secondary {
   background-color: #6cb2eb;
-  color: #000;
+  color: #080808;
 }
 
 .table .col-actions {
@@ -22,7 +22,7 @@ body {
 
 .bg-medium {
   background-color: #6cb2eb;
-  color: #000;
+  color: #080808;
 }
 
 .card-body {
@@ -120,7 +120,7 @@ textarea.form-control:focus {
 
 .input-heading:focus, .input-heading:hover {
   background-color: #b4b4b4;
-  color: #000;
+  color: #080808;
 }
 
 .input-checkbox {

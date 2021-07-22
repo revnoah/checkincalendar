@@ -27,6 +27,49 @@ class OrganizationController extends Controller
         $user = Auth::user();
         $orgcode = session('orgcode', '');
 
+        $organization = $user->organization;
+
+        return view('organization.show', compact('organization') );
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $organization = new Organization();
+        
+        return view('organization.create', compact('organization') );
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $user = Auth::user();
+
+        //update item
+        $organization = new Organization();
+        $organization->user_id = $user->id;
+        $organization->name = $request->input('name');
+        $organization->code = $request->input('code');
+        $organization->description = $request->input('description');
+
+        $organization->save();
+
+        //display message to display to user
+        $request->session()->flash('message', 'Successfully setup organization');
+        $request->session()->flash('status', 'success');
+
+        //set redirect to include query tokens
+        $redirectUri = $this->basepath . '/' . $organization->code;
+
         if ($user) {
             $organization = $user->organization;
             return redirect('organization/' . $organization->code);

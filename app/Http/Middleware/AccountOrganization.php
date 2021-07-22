@@ -2,12 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Organization;
 use Auth;
 use Closure;
 use Illuminate\Http\Request;
 
-class AccountConfig
+class AccountOrganization
 {
     /**
      * Handle an incoming request.
@@ -20,8 +19,8 @@ class AccountConfig
     {
         $user = Auth::user();
 
-        if ($user && !$user->organization) {
-            return redirect('organization/create');
+        if ($user && $user->organization) {
+            return redirect('organization');
         }
 
         return $next($request);

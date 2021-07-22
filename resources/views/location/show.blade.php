@@ -11,7 +11,9 @@
       </div>
     @endif
     <h1>{{ $location->name }}</h1>
-    <p class="text-muted text-uppercase">{{ $location->code }}</p>
+    @if (Auth::check())
+      <p class="text-muted text-uppercase">{{ $location->code }}</p>
+    @endif
     <p class="description">{{ $location->description }}</p>
 
     <div class="row">

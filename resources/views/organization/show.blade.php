@@ -10,7 +10,9 @@
       </div>
     @endif
     <h1>{{ $organization->name }}</h1>
-    <p class="text-muted">{{ $organization->code }}</p>
+    @if (Auth::check())
+      <p class="text-muted text-uppercase">{{ $organization->code }}</p>
+    @endif
     <p class="description">{{ $organization->description }}</p>
     <h2>{{ __('Locations') }}</h2>
     @isset($organization->locations)
