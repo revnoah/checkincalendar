@@ -37,6 +37,8 @@ class OrganizationController extends Controller
      */
     public function create()
     {
+        $organization = new Organization();
+
         return view('organization.create', compact('organization') );
     }
 

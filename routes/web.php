@@ -39,6 +39,8 @@ Route::group(['middleware' => ['account.config', 'auth']], function () {
     Route::resource('location', LocationController::class);
     Route::resource('plan', PlanController::class);
 
+    Route::get('organization/create', [OrganizationController::class, 'create'])->name('organization.create');
+
     // Route::get('location/create', [LocationController::class, 'create'])->name('location.create');
     // Route::get('location/{location}', [LocationController::class, 'show'])->name('location.show');
     // Route::post('location', [LocationController::class, 'store'])->name('location.store');
