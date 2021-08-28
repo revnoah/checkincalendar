@@ -43,13 +43,13 @@ Route::group(['middleware' => ['account.config', 'auth']], function () {
     Route::resource('location', LocationController::class);
     Route::resource('plan', PlanController::class);
 
+    Route::get('organization/create', [OrganizationController::class, 'create'])->name('organization.create');
     /*
     Route::get('/organization', [OrganizationController::class, 'index'])->name('organization.index');
     Route::get('/organization/{organization}', [OrganizationController::class, 'show'])->name('organization.show');
     Route::get('/locatin/{location}', [LocationController::class, 'show'])->name('location.show');
     */
     Route::post('/organization/search', [OrganizationController::class, 'search'])->name('organization.search');
-    
     
 
     // Route::get('location/create', [LocationController::class, 'create'])->name('location.create');

@@ -9,7 +9,9 @@
 
 <div class="container py-5 col-4">
   <div id="form-create" class="panel panel-default">
-    @include('organization/partial-edit')
+    <div class="panel-body">
+      @include('organization/partial-edit')
+    </div>
   </div>
 </div>
 
