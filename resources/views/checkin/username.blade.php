@@ -3,14 +3,14 @@
 @section('content')
 
 @include('partials.info', [
-  'title' => __('Setup Your Organization'), 
-  'info' => __('Add some basic information about your organization.')
+  'title' => __('Sign In'), 
+  'info' => __('Select a username. It should be unique within your organization.')
 ])
 
 <div class="container py-5 col-4">
   <div id="form-create" class="panel panel-default">
     <div class="panel-body">
-      @include('organization/partial-edit')
+      @include('checkin/partial-username')
     </div>
   </div>
 </div>

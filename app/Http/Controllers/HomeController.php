@@ -31,6 +31,12 @@ class HomeController extends Controller
 
             $organization = $user->organization;
 
+            if (!$user->organization) {
+                echo 'no org';
+
+                die;
+            }
+
             return view('organization.show', compact('organization'));
         } else {
             return view('home');

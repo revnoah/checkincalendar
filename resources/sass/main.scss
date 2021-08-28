@@ -1,6 +1,6 @@
 body {
-    background-color: $dark-grey;
-    color: $white;
+    background-color: $lighter-grey;
+    color: $black;
 }
 
 .jumbotron {
@@ -13,13 +13,6 @@ body {
 .jumbotron-secondary {
     background-color: $accent-bg;
     color: $accent-fg;
-}
-
-.alert-messages {
-    padding: 1rem;
-    margin: 0;
-    background-color: $white;
-    color: $dark-grey;    
 }
 
 .table {

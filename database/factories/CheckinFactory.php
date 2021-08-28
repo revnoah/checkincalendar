@@ -31,7 +31,7 @@ class CheckinFactory extends Factory
                 return Location::inRandomOrder()->first()->id;
             },
             'username' => $this->faker->name(),
-            'ip_address' => $this->faker->ipv4(),            
+            'ip_address' => $this->faker->ipv4(),
         ];
     }
 }

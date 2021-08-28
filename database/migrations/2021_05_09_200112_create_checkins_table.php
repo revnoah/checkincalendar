@@ -17,6 +17,7 @@ class CreateCheckinsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('location_id');
+            $table->enum('status', array('checkin', 'checkout', 'schedule'))->default('checkin');
             $table->string('username', 48);
             $table->string('ip_address', 24);
             $table->timestamps();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Organization;
 use Auth;
 use Closure;
 use Illuminate\Http\Request;
@@ -19,10 +20,8 @@ class AccountConfig
     {
         $user = Auth::user();
 
-        if (!$user->organization) {
-            echo 'user organization does not exist';
-
-            die;
+        if ($user && !$user->organization) {
+            return redirect('organization/create');
         }
 
         return $next($request);

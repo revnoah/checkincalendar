@@ -19,6 +19,10 @@ class AccountOrganization
     {
         $user = Auth::user();
 
+        if ($user && $user->organization) {
+            return redirect('organization');
+        }
+
         return $next($request);
     }
 }

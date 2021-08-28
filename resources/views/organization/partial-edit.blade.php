@@ -1,5 +1,6 @@
 <div id="update-organization" class="form-create">
-  <form id="organization-update" action="{{ route('organization.update', ['organization' => $organization]) }}" method="post">
+
+  <form id="organization-update" action="{{ $organization->id > 0 ? route('organization.update', ['organization' => $organization]) : route('organization.store') }}" method="post">
     {{ csrf_field() }}
 
     @if ($organization->id > 0)
@@ -16,7 +17,7 @@
     <div class="row">
       <div class="form-group col-md-12 col-sm-12 col-xs-12">
         <label for="code">{{ __('Code') }}</label>
-        <input type="text" id="code" name="code" value="{{ old('code') !== null ? old('code') : (isset($organization->code) ? $organization->code : '') }}" class="form-control form-input" placeholder="{{ __('Code') }}" />
+        <input type="text" id="code" name="code" value="{{ old('code') !== null ? old('code') : (isset($organization->code) ? $organization->code : '') }}" class="form-control form-input" placeholder="{{ __('Code') }}" required />
       </div>
     </div>
 
@@ -29,7 +30,7 @@
 
     <div class="row">
       <div class="form-group col-md-12 col-sm-12 col-xs-12">
-        <button id="update" name="update" class="btn btn-primary">{{ $organization->id > 0 ? __('Update') : __('Create') }}</button>
+        <button id="update" name="update" class="btn btn-primary">{{ $organization->id > 0 ? __('Update') : __('Setup') }}</button>
       </div>
     </div>
 
