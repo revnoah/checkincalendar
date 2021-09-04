@@ -70,7 +70,7 @@ class LocationController extends Controller
 
         //redirect based on submit button
         if($location->id > 0) {
-            $url = $this->basepath;
+            $url = 'organization/' . $user->organization->code;
             return redirect($url);
         } else {
             return back();
@@ -162,7 +162,7 @@ class LocationController extends Controller
      */
     public function pdf(Location $location)
     {
-        $qrCode = $this->generateQrCode($location->url, 480);
+        $qrCode = $this->generateQrCode($location->url, 360);
 
         header("Content-Type: application/pdf");
 
@@ -172,7 +172,8 @@ class LocationController extends Controller
 
         $mpdf->WriteHTML('<h1 align="center">' . $location->name . '</h1>');
         $mpdf->WriteHTML('<p align="center">' . $location->description . '</p>');
-        $mpdf->Image($qrCode->getDataUri(), 40, 80);
+        $mpdf->Image($qrCode->getDataUri(), 55, 60);
+        $mpdf->WriteHTML('<p align="center">' . $location->code . '</p>');
         $mpdf->WriteHTML('<p align="center">' . $location->url . '</p>');
 
         $mpdf->Output();

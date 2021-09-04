@@ -31,6 +31,10 @@ class HomeController extends Controller
 
             $organization = $user->organization;
 
+            if (!$organization) {
+                return redirect('organization/create');
+            }
+
             return view('organization.show', compact('organization'));
         } else {
             return view('home');

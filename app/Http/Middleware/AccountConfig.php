@@ -24,11 +24,10 @@ class AccountConfig
         if (!$user->organization) {
             $organization = new Organization();
             $organization->name = $user->name;
-            $organization->code = substr($user->name, 0, 32) . uniqid();
+            $userAlphaNumeric = preg_replace("/[^a-zA-Z0-9]+/", "", $user->name);
+            $organization->code = substr(strtolower($userAlphaNumeric) . uniqid(), 0, 32);
 
-            $organization->save();
-
-            $user->organization()->associate($organization->ID);
+            $user->organization()->save($organization);
         }
 
         return $next($request);

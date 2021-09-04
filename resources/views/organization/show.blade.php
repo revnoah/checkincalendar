@@ -14,9 +14,9 @@
     <p class="description">{{ $organization->description }}</p>
     <h2>{{ __('Locations') }}</h2>
     @isset($organization->locations)
-      <div>
+      <div class="row">
       @foreach ($organization->locations as $location)
-      <div class="card" style="width: 18rem;">
+      <div class="card col-4 m-3">
         <img class="card-img-top" src="..." alt="Card image cap">
         <div class="card-body">
           <h3 class="card-title"><a href="{{ route('location.show', ['location' => $location ]) }}">{{ $location->name }}</a></h3>

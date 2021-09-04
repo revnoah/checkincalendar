@@ -57,6 +57,50 @@ class OrganizationController extends Controller
      * @param  \App\Models\Organization  $organization
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        $organization = new Organization();
+
+        return view('organization.create', compact('organization'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Organization  $organization
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $user = Auth::user();
+
+        //update item
+        $organization = new Organization();
+        $organization->name = $request->input('name');
+        $organization->code = $request->input('code');
+        $organization->description = $request->input('description');
+
+        $organization->save();
+
+        $user->attach($organization);
+
+        //display message to display to user
+        $request->session()->flash('message', 'Successfully updated organization');
+        $request->session()->flash('status', 'success');
+
+        //set redirect to include query tokens
+        $redirectUri = $this->basepath;
+
+        return redirect($redirectUri);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Organization  $organization
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Organization $organization)
     {
         return view('organization.edit', compact('organization'));
@@ -71,8 +115,6 @@ class OrganizationController extends Controller
      */
     public function update(Request $request, Organization $organization)
     {
-        $user = Auth::user();
-
         //update item
         $organization->name = $request->input('name');
         $organization->code = $request->input('code');

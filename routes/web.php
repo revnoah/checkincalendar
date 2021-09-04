@@ -23,21 +23,15 @@ use Illuminate\Support\Facades\Route;
 
 //basic authenticated routes
 Route::group(['middleware' => ['account.config', 'auth']], function () {
-    Route::resource('organization', OrganizationController::class);
     Route::resource('location', LocationController::class);
     Route::resource('plan', PlanController::class);
 
     Route::get('/location/{location}/pdf', [LocationController::class, 'pdf'])->name('location.pdf');
 
-    /*
-    //accounts
-    Route::resource('/account', 'AccountController')->except(['index', 'create', 'store']);
-    Route::get('/confirm', 'AccountController@confirm')->name('account.confirm');
-    Route::post('/confirmed', 'AccountController@confirmed')->name('account.confirmed');
-    Route::post('/sendcode', 'AccountController@sendcode')->name('account.sendcode');
-
-    Route::get('/me', 'AccountController@me')->name('account.me');
-    */
+    // Route::get('/organization', [OrganizationController::class, 'index'])->name('organization.index');
+    Route::resource('organization', OrganizationController::class);
+    Route::get('/organization/{organization}', [OrganizationController::class, 'show'])->name('organization.show');
+    Route::post('/organization/search', [OrganizationController::class, 'search'])->name('organization.search');
 });
 
 //basic authenticated routes
@@ -53,9 +47,5 @@ Route::post('/checkin/signin', [CheckinController::class, 'signedin'])->name('ch
 
 //shared and anon routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-Route::get('/organization', [OrganizationController::class, 'index'])->name('organization.index');
-Route::get('/organization/{organization}', [OrganizationController::class, 'show'])->name('organization.show');
-Route::post('/organization/search', [OrganizationController::class, 'search'])->name('organization.search');
 
 Auth::routes();
